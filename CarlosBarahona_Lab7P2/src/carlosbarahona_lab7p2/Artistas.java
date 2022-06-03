@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class Artistas extends Usuarios {
 
     private String nombreArtistico;
-    private ArrayList<Canciones> cancionesPublicados;
+    private ArrayList<Singles> cancionesPublicados;
     private ArrayList<Albumes> albumesPublicados;
 
-    public Artistas(String nombreArtistico, ArrayList<Canciones> cancionesPublicados, ArrayList<Albumes> albumesPublicados, String usuario, String contrasena, int edad) {
+    public Artistas(String nombreArtistico, ArrayList<Singles> cancionesPublicados, ArrayList<Albumes> albumesPublicados, String usuario, String contrasena, int edad) {
         super(usuario, contrasena, edad);
         this.nombreArtistico = nombreArtistico;
         this.cancionesPublicados = cancionesPublicados;
@@ -32,11 +32,11 @@ public class Artistas extends Usuarios {
         this.nombreArtistico = nombreArtistico;
     }
 
-    public ArrayList<Canciones> getCancionesPublicados() {
+    public ArrayList<Singles> getCancionesPublicados() {
         return cancionesPublicados;
     }
 
-    public void setCancionesPublicados(ArrayList<Canciones> cancionesPublicados) {
+    public void setCancionesPublicados(ArrayList<Singles> cancionesPublicados) {
         this.cancionesPublicados = cancionesPublicados;
     }
 
