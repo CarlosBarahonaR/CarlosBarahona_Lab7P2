@@ -12,10 +12,10 @@ package carlosbarahona_lab7p2;
 public class Canciones {
 
     private String titulo;
-    private String tiempoDuración;
+    private double tiempoDuración;
     private Albumes albumPertence;
 
-    public Canciones(String titulo, String tiempoDuración, Albumes albumPertence) {
+    public Canciones(String titulo, double tiempoDuración, Albumes albumPertence) {
         this.titulo = titulo;
         this.tiempoDuración = tiempoDuración;
         this.albumPertence = albumPertence;
@@ -29,11 +29,11 @@ public class Canciones {
         this.titulo = titulo;
     }
 
-    public String getTiempoDuración() {
+    public double getTiempoDuración() {
         return tiempoDuración;
     }
 
-    public void setTiempoDuración(String tiempoDuración) {
+    public void setTiempoDuración(double tiempoDuración) {
         this.tiempoDuración = tiempoDuración;
     }
 
