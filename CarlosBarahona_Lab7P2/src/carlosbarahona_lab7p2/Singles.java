@@ -9,6 +9,26 @@ package carlosbarahona_lab7p2;
  *
  * @author Admin
  */
-public class Singles {
-    
+public class Singles extends Lanzamientos {
+
+    private Canciones cancion;
+
+    public Singles(Canciones cancion, String tituloLanzamiento, String fechaLanzamiento, int likes) {
+        super(tituloLanzamiento, fechaLanzamiento, likes);
+        this.cancion = cancion;
+    }
+
+    public Canciones getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(Canciones cancion) {
+        this.cancion = cancion;
+    }
+
+    @Override
+    public String toString() {
+        return "Singles{" + "cancion=" + cancion + '}';
+    }
+
 }
