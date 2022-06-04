@@ -6,8 +6,11 @@
 package carlosbarahona_lab7p2;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -52,7 +55,7 @@ public class SpotifyApp extends javax.swing.JFrame {
     public void single() {
 
         jFrame4.setLocationRelativeTo(null);
-        jFrame4.setTitle("Register.");
+        jFrame4.setTitle("Crear single.");
         jFrame4.setVisible(true);
 
     }
@@ -60,8 +63,16 @@ public class SpotifyApp extends javax.swing.JFrame {
     public void album() {
 
         jFrame5.setLocationRelativeTo(null);
-        jFrame5.setTitle("Register.");
+        jFrame5.setTitle("Crear album.");
         jFrame5.setVisible(true);
+
+    }
+
+    public void cancionAlbum() {
+
+        jFrame6.setLocationRelativeTo(null);
+        jFrame6.setTitle("Agregar cancion a album.");
+        jFrame6.setVisible(true);
 
     }
 
@@ -138,6 +149,15 @@ public class SpotifyApp extends javax.swing.JFrame {
         jFormattedTextField20 = new javax.swing.JFormattedTextField();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jFrame6 = new javax.swing.JFrame();
+        jLabel37 = new javax.swing.JLabel();
+        jTextField16 = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        jFormattedTextField22 = new javax.swing.JFormattedTextField();
+        jButton12 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         usuarioTextField = new javax.swing.JTextField();
@@ -363,9 +383,7 @@ public class SpotifyApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jFrame1.setMaximumSize(new java.awt.Dimension(509, 492));
         jFrame1.setMinimumSize(new java.awt.Dimension(509, 492));
-        jFrame1.setPreferredSize(new java.awt.Dimension(509, 492));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel5.setText("Registrar Usuario");
@@ -451,14 +469,14 @@ public class SpotifyApp extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Titulo", "Duración"
+                "Title de Lanzamiento", "Fecha de Lanzamiento", "Titulo", "Duración"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -475,7 +493,7 @@ public class SpotifyApp extends javax.swing.JFrame {
 
         jLabel39.setText("Tiempo de duración (Ejemplo 1.30)");
 
-        jFormattedTextField19.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextField19.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jButton18.setText("Crear");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
@@ -497,7 +515,7 @@ public class SpotifyApp extends javax.swing.JFrame {
 
         jLabel41.setText("Fecha de lanzamiento");
 
-        jFormattedTextField21.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextField21.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jButton22.setText("Publicar");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
@@ -582,14 +600,14 @@ public class SpotifyApp extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Titulo", "Duración"
+                "Titulo lanzamiento", "Fecha lanzamiento", "Likes"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -602,11 +620,11 @@ public class SpotifyApp extends javax.swing.JFrame {
         });
         jScrollPane15.setViewportView(jTable15);
 
-        jLabel35.setText("Titulo");
+        jLabel35.setText("Titulo lanzamiento");
 
-        jLabel40.setText("Tiempo de duración (Ejemplo 1.30)");
+        jLabel40.setText("Fecha de lanzamiento");
 
-        jFormattedTextField20.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextField20.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jButton20.setText("Crear");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -615,10 +633,17 @@ public class SpotifyApp extends javax.swing.JFrame {
             }
         });
 
-        jButton21.setText("Eliminar");
+        jButton21.setText("Publicar");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton21ActionPerformed(evt);
+            }
+        });
+
+        jButton23.setText("Eliminar");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
             }
         });
 
@@ -630,9 +655,6 @@ public class SpotifyApp extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jFrame5Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jFrame5Layout.createSequentialGroup()
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,9 +664,14 @@ public class SpotifyApp extends javax.swing.JFrame {
                                 .addComponent(jLabel40))
                             .addComponent(jFormattedTextField20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jFrame5Layout.createSequentialGroup()
-                        .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel20)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jFrame5Layout.createSequentialGroup()
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jFrame5Layout.setVerticalGroup(
@@ -665,11 +692,76 @@ public class SpotifyApp extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jFrame5Layout.createSequentialGroup()
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 57, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
+        );
+
+        jFrame6.setMaximumSize(new java.awt.Dimension(353, 266));
+        jFrame6.setMinimumSize(new java.awt.Dimension(353, 266));
+
+        jLabel37.setText("Titulo");
+
+        jLabel42.setText("Tiempo de duración (Ejemplo 1.30)");
+
+        jFormattedTextField22.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jButton12.setText("Crear");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setText("Agregar canciones al album recien creado");
+
+        jLabel22.setText("(Si no agrega canciones el album no se va a poder publicar)");
+
+        javax.swing.GroupLayout jFrame6Layout = new javax.swing.GroupLayout(jFrame6.getContentPane());
+        jFrame6.getContentPane().setLayout(jFrame6Layout);
+        jFrame6Layout.setHorizontalGroup(
+            jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame6Layout.createSequentialGroup()
+                .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jFrame6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jFormattedTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jFrame6Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jFrame6Layout.createSequentialGroup()
+                                .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel37)
+                                    .addComponent(jLabel42)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22))
+                                .addGap(44, 44, 44))
+                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField16))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jFrame6Layout.setVerticalGroup(
+            jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame6Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFormattedTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(jButton12)
+                .addGap(34, 34, 34))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -893,9 +985,9 @@ public class SpotifyApp extends javax.swing.JFrame {
         String tituloLanzamiento = jTextField15.getText();
         String fechaLanzamiento = jFormattedTextField21.getText();
         DefaultTableModel model = (DefaultTableModel) jTable14.getModel();
-        Canciones cancion = new Canciones(titulo, duracion, null);
-        ((Artistas) usuarioConectado).getCancionesPublicados().add(new Singles(cancion, tituloLanzamiento, fechaLanzamiento, 0));
-        model.addRow(new Object[]{titulo, duracion});
+
+        model.addRow(new Object[]{tituloLanzamiento, fechaLanzamiento, titulo, duracion});
+        JOptionPane.showMessageDialog(null, "La canción fue creada.");
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -906,10 +998,13 @@ public class SpotifyApp extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable14.getModel();
 
         model.removeRow(fila);
+        JOptionPane.showMessageDialog(null, "La canción fue eliminada.");
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
+        cancionAlbum();
+
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -918,7 +1013,40 @@ public class SpotifyApp extends javax.swing.JFrame {
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         // TODO add your handling code here:
+        int fila = jTable14.getSelectedRow();
+        String tituloLanzamiento = jTable14.getModel().getValueAt(fila, 0).toString();
+        String titulo = jTable14.getModel().getValueAt(fila, 2).toString();
+        String fechaLanzamiento = jTable14.getModel().getValueAt(fila, 2).toString();
+        int duracion = (Integer) jTable14.getModel().getValueAt(fila, 3);
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+
+        Enumeration lanzamientos = root.children();
+        while (lanzamientos.hasMoreElements()) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) lanzamientos.nextElement();
+            if (node.toString().equals("Single")) {
+
+                DefaultMutableTreeNode tituloCancion = new DefaultMutableTreeNode(titulo);
+                System.out.println(titulo);
+                node.add(tituloCancion);
+                model.nodesWereInserted(node, new int[]{node.getChildCount() - 1});
+                Canciones cancion = new Canciones(titulo, duracion, null);
+                ((Artistas) usuarioConectado).getCancionesPublicados().add(new Singles(cancion, tituloLanzamiento, fechaLanzamiento, 0));
+                JOptionPane.showMessageDialog(null, "La canción fue publicada.");
+                break;
+            }
+        }
+
     }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -960,12 +1088,14 @@ public class SpotifyApp extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -977,11 +1107,13 @@ public class SpotifyApp extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField19;
     private javax.swing.JFormattedTextField jFormattedTextField20;
     private javax.swing.JFormattedTextField jFormattedTextField21;
+    private javax.swing.JFormattedTextField jFormattedTextField22;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JFrame jFrame3;
     private javax.swing.JFrame jFrame4;
     private javax.swing.JFrame jFrame5;
+    private javax.swing.JFrame jFrame6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -995,14 +1127,18 @@ public class SpotifyApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1024,6 +1160,7 @@ public class SpotifyApp extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
     private javax.swing.JTree jTree1;
     private javax.swing.JTree jTree2;
     private javax.swing.JTextField usuarioTextField;
