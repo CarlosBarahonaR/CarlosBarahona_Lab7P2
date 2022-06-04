@@ -1014,7 +1014,7 @@ public class SpotifyApp extends javax.swing.JFrame {
         String fechaLanzamiento = jFormattedTextField20.getText();
         Albumes album = new Albumes(canciones, 0, tituloLanzamiento, fechaLanzamiento, 0);
         ((Artistas) usuarioConectado).getAlbumesPublicados().add(album);
-        DefaultTableModel model = (DefaultTableModel) jTable14.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable15.getModel();
 
         model.addRow(new Object[]{tituloLanzamiento, fechaLanzamiento, 0});
 
@@ -1025,6 +1025,23 @@ public class SpotifyApp extends javax.swing.JFrame {
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
+        int fila = jTable14.getSelectedRow();
+        String tituloLanzamiento = jTable14.getModel().getValueAt(fila, 0).toString();
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+
+        Enumeration lanzamientos = root.children();
+        while (lanzamientos.hasMoreElements()) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) lanzamientos.nextElement();
+            if (node.toString().equals("Albumes")) {
+
+                DefaultMutableTreeNode tituloAlbum = new DefaultMutableTreeNode(tituloLanzamiento);
+                node.add(tituloAlbum);
+                model.nodesWereInserted(node, new int[]{node.getChildCount() - 1});
+                JOptionPane.showMessageDialog(null, "El album fue publicado.");
+                break;
+            }
+        }
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1057,6 +1074,13 @@ public class SpotifyApp extends javax.swing.JFrame {
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
+
+        int fila = jTable15.getSelectedRow();
+
+        DefaultTableModel model = (DefaultTableModel) jTable15.getModel();
+
+        model.removeRow(fila);
+        JOptionPane.showMessageDialog(null, "El album fue eliminado.");
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1065,11 +1089,19 @@ public class SpotifyApp extends javax.swing.JFrame {
         double duracion = new Double(jFormattedTextField22.getText());
         Canciones cancion = new Canciones(titulo, duracion, null);
         String tituloAlbum = jTextField17.getText();
+        boolean encontrado = false;
 
         for (int i = 0; i < ((Artistas) usuarioConectado).getAlbumesPublicados().size(); i++) {
             if (((Artistas) usuarioConectado).getAlbumesPublicados().get(i).getTituloLanzamiento().equals(tituloAlbum)) {
                 ((Artistas) usuarioConectado).getAlbumesPublicados().get(i).getCanciones().add(cancion);
+                encontrado = true;
+            } else {
+                encontrado = false;
             }
+        }
+
+        if (encontrado) {
+            JOptionPane.showMessageDialog(null, "La canción fue agregada a" + tituloAlbum);
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
